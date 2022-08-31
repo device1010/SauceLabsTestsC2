@@ -2,7 +2,7 @@ import Utilities.DriverManager;
 import org.junit.AfterClass;
 import org.junit.Before;
 
-public class BaseTest {
+public class BaseTest{
     @Before
     public void setup(){
         DriverManager.getDriver().get("https://www.saucedemo.com/");

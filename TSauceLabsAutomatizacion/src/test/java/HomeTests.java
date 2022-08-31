@@ -16,7 +16,7 @@ public class HomeTests extends BaseTest{
         loginPage.clickOnLoginButton();
         HomePage homePage = new HomePage(DriverManager.getDriver());
         homePage.clickOnAddBackpackToCartButton();
-        Assert.assertEquals(homePage.getCartIconText(),"1");
+        Assert.assertEquals("1", homePage.getCartIconText());
         homePage.clickOnRemoveBackpackFromCartButton();
     }
     @Test
@@ -29,7 +29,7 @@ public class HomeTests extends BaseTest{
         HomePage homePage = new HomePage(DriverManager.getDriver());
         homePage.clickOnAddBackpackToCartButton();
         homePage.clickOnRemoveBackpackFromCartButton();
-        Assert.assertEquals(homePage.getCartIconText(),"");
+        Assert.assertEquals("", homePage.getCartIconText());
     }
     @Test
     public void verifyGoToCart() throws InterruptedException {
@@ -44,5 +44,4 @@ public class HomeTests extends BaseTest{
         CartPage cartPage = new CartPage(DriverManager.getDriver());
         Assert.assertTrue(cartPage.YourCartIsDisplayed());
     }
-
 }

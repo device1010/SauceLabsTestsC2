@@ -22,9 +22,10 @@ public class HomePage {
     WebElement removeCartButton;
     @FindBy(id = "react-burger-menu-btn")
     WebElement burguerButton;
-
     @FindBy(id = "logout_sidebar_link")
     WebElement logOutButton;
+    @FindBy(id = "add-to-cart-sauce-labs-bike-light")
+    WebElement addBikeLightCartButton;
 
     public HomePage(WebDriver driver){
         this.driver = driver;
@@ -50,7 +51,12 @@ public class HomePage {
     public void clickOnBurguerButton(){
         burguerButton.click();
     }
-    public void clickOnLogOutButton(){
+    public void clickOnAddBikeLight(){
+        addBikeLightCartButton.click();
+    }
+    public void clickOnLogoutLink(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(logOutButton));
         logOutButton.click();
     }
 }
