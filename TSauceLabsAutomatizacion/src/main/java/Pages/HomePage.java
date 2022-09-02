@@ -6,9 +6,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomePage {
     WebDriver driver;
@@ -26,6 +29,11 @@ public class HomePage {
     WebElement logOutButton;
     @FindBy(id = "add-to-cart-sauce-labs-bike-light")
     WebElement addBikeLightCartButton;
+    @FindBy(className = "product_sort_container")
+    WebElement productFilterDropDown;
+    @FindBy(className = "inventory_item_price")
+    List<WebElement> itemPricesLabel;
+
 
     public HomePage(WebDriver driver){
         this.driver = driver;
@@ -58,5 +66,20 @@ public class HomePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(logOutButton));
         logOutButton.click();
+    }
+    public void selectProductFilter(String element){
+        Select selectObject = new Select(productFilterDropDown);
+        selectObject.selectByVisibleText(element);
+    }
+    public List<Double> getAllItemPrices(){
+        List<Double> prices = new ArrayList<>();
+
+        for (WebElement itemPrice: itemPricesLabel) {
+            String itemPriceText = itemPrice.getText();
+            StringBuilder sb = new StringBuilder(itemPriceText);
+            sb.deleteCharAt(0);
+            prices.add(Double.parseDouble(sb.toString()));
+        }
+        return prices;
     }
 }

@@ -33,4 +33,8 @@ public class LoginPage {
         String errorMessage = loginError.getText();
         return errorMessage;
     }
+    public boolean loginButtonIsDisplayed(){
+        boolean loginButtonIsDisplayed = loginButton.isDisplayed();
+        return loginButtonIsDisplayed;
+    }
 }

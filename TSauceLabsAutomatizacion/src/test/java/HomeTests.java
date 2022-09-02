@@ -2,10 +2,12 @@ import Pages.CartPage;
 import Pages.HomePage;
 import Pages.LoginPage;
 import Utilities.DriverManager;
+import com.google.common.collect.Ordering;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.Duration;
+import java.util.List;
 
 public class HomeTests extends BaseTest{
     @Test
@@ -43,5 +45,20 @@ public class HomeTests extends BaseTest{
 
         CartPage cartPage = new CartPage(DriverManager.getDriver());
         Assert.assertTrue(cartPage.YourCartIsDisplayed());
+    }
+    @Test
+    public void verifyLowToHighPriceItemsFilterTest() {
+        // Login with standard user
+        LoginPage loginPage = new LoginPage(DriverManager.getDriver());
+        loginPage.setUsernameTextBox("standard_user");
+        loginPage.setPasswordTextBox("secret_sauce");
+        loginPage.clickOnLoginButton();
+
+        // Filtering by price
+        HomePage homepage= new HomePage(DriverManager.getDriver());
+        homepage.selectProductFilter("Price (low to high)");
+        List<Double> prices = homepage.getAllItemPrices();
+        boolean pricesAreSorted = Ordering.natural().isOrdered(prices);
+        Assert.assertTrue(pricesAreSorted);
     }
 }
